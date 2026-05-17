@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Confirmed! – ZEST Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <!-- ✅ REPLACE WITH YOUR GA4 TAG -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script> -->
+
+  <!-- ✅ REPLACE WITH YOUR VWO SNIPPET -->
+  <!-- <script type='text/javascript' id='vwoCode'>YOUR VWO CODE HERE</script> -->
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #0e0e0e; --surface: #1a1a1a; --accent: #f5c518; --text: #f0ede6; --muted: #888; --radius: 12px; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 48px; border-bottom: 1px solid #222;
+      background: rgba(14,14,14,0.95);
+    }
+    .logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--accent); letter-spacing: 2px; text-decoration: none; }
+
+    .success-container {
+      max-width: 640px;
+      margin: 80px auto;
+      padding: 0 24px;
+      text-align: center;
+    }
+
+    .success-icon {
+      width: 100px; height: 100px;
+      background: rgba(245,197,24,0.1);
+      border: 2px solid rgba(245,197,24,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      margin: 0 auto 32px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245,197,24,0.2); }
+      50% { box-shadow: 0 0 0 16px rgba(245,197,24,0); }
+    }
+
+    .success-tag {
+      display: inline-block;
+      background: rgba(76,175,80,0.12);
+      color: #4caf50;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .success-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      letter-spacing: 1px;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .success-title span { color: var(--accent); }
+
+    .success-subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .order-card {
+      background: var(--surface);
+      border: 1px solid #222;
+      border-radius: 20px;
+      padding: 32px;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #252525;
+    }
+    .order-id-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; }
+    .order-id-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+      letter-spacing: 2px;
+    }
+    .order-status {
+      background: rgba(76,175,80,0.12);
+      color: #4caf50;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .order-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .order-item-img {
+      width: 56px; height: 56px;
+      background: #141414;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+    .order-item-name { font-weight: 600; font-size: 0.95rem; }
+    .order-item-meta { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+    .order-item-price {
+      margin-left: auto;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--accent);
+    }
+
+    .order-totals { border-top: 1px solid #252525; padding-top: 20px; }
+    .total-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      margin-bottom: 10px;
+      color: var(--muted);
+    }
+    .total-line.final {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #2a2a2a;
+    }
+    .total-line.final .amt {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .timeline {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 20px; left: 10%; right: 10%;
+      height: 2px;
+      background: #2a2a2a;
+    }
+    .timeline-step { display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 1; }
+    .step-dot {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .step-dot.done { background: rgba(245,197,24,0.15); border: 2px solid var(--accent); }
+    .step-dot.pending { background: #1e1e1e; border: 2px solid #333; }
+    .step-label { font-size: 0.72rem; color: var(--muted); text-align: center; }
+    .step-label.active { color: var(--accent); font-weight: 600; }
+
+    .btn-home {
+      display: inline-block;
+      background: var(--accent);
+      color: #0e0e0e;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 40px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-right: 16px;
+    }
+    .btn-home:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(245,197,24,0.3); }
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 16px 32px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      border: 1px solid #333;
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); }
+
+    footer { border-top: 1px solid #1e1e1e; padding: 32px 48px; color: var(--muted); font-size: 0.82rem; display: flex; justify-content: space-between; margin-top: 80px; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">ZEST</a>
+  </nav>
+
+  <div class="success-container">
+    <div class="success-icon">✅</div>
+    <div class="success-tag">✓ Payment Successful</div>
+    <div class="success-title">Order <span>Confirmed!</span></div>
+    <p class="success-subtitle">
+      Thanks for your purchase! Your order has been placed and will be delivered in 3–5 business days.
+      A confirmation has been sent to your email.
+    </p>
+
+    <!-- ORDER TRACKING TIMELINE -->
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="step-dot done">📦</div>
+        <div class="step-label active">Order Placed</div>
+      </div>
+      <div class="timeline-step">
+        <div class="step-dot pending">🏭</div>
+        <div class="step-label">Processing</div>
+      </div>
+      <div class="timeline-step">
+        <div class="step-dot pending">🚚</div>
+        <div class="step-label">Shipped</div>
+      </div>
+      <div class="timeline-step">
+        <div class="step-dot pending">🏠</div>
+        <div class="step-label">Delivered</div>
+      </div>
+    </div>
+
+    <!-- ORDER CARD -->
+    <div class="order-card">
+      <div class="order-header">
+        <div>
+          <div class="order-id-label">Order ID</div>
+          <div class="order-id-value">#ZST-2025-00142</div>
+        </div>
+        <div class="order-status">✓ Confirmed</div>
+      </div>
+
+      <div class="order-item">
+        <div class="order-item-img">🎧</div>
+        <div>
+          <div class="order-item-name">Wireless Headphones Pro</div>
+          <div class="order-item-meta">Qty: 1 &nbsp;·&nbsp; Midnight Black</div>
+        </div>
+        <div class="order-item-price">₹2,499</div>
+      </div>
+
+      <div class="order-totals">
+        <div class="total-line"><span>Subtotal</span><span>₹3,999</span></div>
+        <div class="total-line"><span>Discount (37%)</span><span style="color:#4caf50">−₹1,500</span></div>
+        <div class="total-line"><span>Delivery</span><span style="color:#4caf50">FREE</span></div>
+        <div class="total-line final"><span>Total Paid</span><span class="amt">₹2,499</span></div>
+      </div>
+    </div>
+
+    <a href="index.html" class="btn-home">Continue Shopping</a>
+    <a href="#" class="btn-outline">Track Order</a>
+  </div>
+
+  <footer>
+    <span>© 2025 ZEST Store — Test Site for GA4 + VWO Practice</span>
+    <span>Built for learning purposes</span>
+  </footer>
+
+  <script>
+    // GA4 — purchase event fires on this page
+    window.addEventListener('load', function() {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'purchase', {
+          transaction_id: 'ZST-2025-00142',
+          currency: 'INR',
+          value: 2499,
+          items: [{ item_id: 'SKU001', item_name: 'Wireless Headphones Pro', price: 2499, quantity: 1 }]
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
